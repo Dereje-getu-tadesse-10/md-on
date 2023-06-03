@@ -26,7 +26,7 @@ export const Wrapper = ({ children }: { children: ReactNode }) => {
 		<Header />
 		<main className="container mx-auto px-4 md:px-0">
 			{alert?.message && <Alert message={alert.message} type={alert} />}
-			<section className={"min-h-screen grid md:grid-cols-2 md:gap-2"}>
+			<section className={"min-h-[80vh] grid md:grid-cols-2 md:gap-2"}>
 				{children}
 			</section>
 		</main>
