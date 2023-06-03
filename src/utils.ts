@@ -1,5 +1,5 @@
 import { AlertType, TypeAlert } from "./types";
-import {SetState} from "zustand";
+import { SetState } from "zustand";
 const LOCAL_STORAGE_KEY = "markdown_data";
 
 const getMarkdownData = () => {
@@ -10,27 +10,32 @@ const getMarkdownData = () => {
 	return [];
 };
 
-const saveMarkdown = (id: string, title: string, markdown: string, setAlert: SetState<AlertType>) => {
+const saveMarkdown = (
+	id: string,
+	title: string,
+	markdown: string,
+	setAlert: SetState<AlertType>,
+) => {
 	const markdownData = getMarkdownData();
 
-	const titleExists = markdownData.some((data: { title: string; }) => {
-		return data.title === title;
-	});
+	const existingEntryIndex = markdownData.findIndex(
+		(data: { title: string }) => data.title === title,
+	);
 
-
-	if (titleExists) {
+	if (existingEntryIndex !== -1) {
+		markdownData[existingEntryIndex] = { id, title, markdown };
 		setAlert({
-			message: "Title already exists",
-			type: TypeAlert.Danger,
-		})
-		return;
+			message: "Updated",
+			type: TypeAlert.Success,
+		});
+	} else {
+		markdownData.push({ id, title, markdown });
+		setAlert({
+			message: "Saved",
+			type: TypeAlert.Success,
+		});
 	}
 
-	markdownData.push({ id, title, markdown });
-	setAlert({
-		message: "Saved",
-		type: TypeAlert.Success,
-	})
 	return localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(markdownData));
 };
 

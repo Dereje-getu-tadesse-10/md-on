@@ -12,6 +12,9 @@ export default function WithDropdown({
 	items,
 }: WithDropdownProps) {
 	const { setMarkdown, setTitle } = useMDStore();
+
+	console.log();
+
 	return (
 		<div className="inline-flex rounded-md shadow-sm absolute right-0 bottom-5">
 			<button
@@ -22,7 +25,14 @@ export default function WithDropdown({
 				{text}
 			</button>
 			<Menu as="div" className="relative -ml-px block">
-				<Menu.Button className="relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+				<Menu.Button
+					disabled={items.length === 0}
+					className={classNames(
+						`${
+							items.length === 0 && "cursor-not-allowed"
+						} relative inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10`,
+					)}
+				>
 					<span className="sr-only">Open options</span>
 					<ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
 				</Menu.Button>

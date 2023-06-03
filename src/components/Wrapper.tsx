@@ -1,10 +1,9 @@
-import {ReactNode, useEffect} from 'react';
-import { Alert } from "./Alert";
 import useMDStore from "../stores/useMd";
+import { Alert } from "./Alert";
+import { ReactNode, useEffect } from "react";
 
 export const Wrapper = ({ children }: { children: ReactNode }) => {
 	const { alert, setAlert } = useMDStore();
-
 
 	useEffect(() => {
 		if (alert) {
@@ -16,7 +15,7 @@ export const Wrapper = ({ children }: { children: ReactNode }) => {
 
 			return () => {
 				clearTimeout(timer);
-			}
+			};
 		}
 	}, [alert]);
 
