@@ -5,8 +5,7 @@ import { ChangeEvent, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 
 export const MDInput = () => {
-	const { markdown, setMarkdown,  data, setData, setAlert,, setTitle, title } =
-		useMDStore();
+	const { markdown, setMarkdown,  data, setData, setAlert, setTitle, title } = useMDStore();
 	const id = uuid();
 	const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
 		setMarkdown(event.target.value);
@@ -15,7 +14,6 @@ export const MDInput = () => {
 	useEffect(() => {
 		setData(getMarkdownData());
 	}, []);
-
 
 	return (
 		<div className={"relative w-full h-full"}>

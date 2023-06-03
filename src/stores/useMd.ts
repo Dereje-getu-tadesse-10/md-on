@@ -8,8 +8,8 @@ type MDContext = {
 	setTitle: (title: string) => void;
 	data: Item[];
 	setData: (data: Item[]) => void;
-	alert: AlertType[];
-	setAlert: (alert: AlertType[]) => void;
+	alert: AlertType;
+	setAlert: (alert: AlertType) => void;
 };
 
 const useMDStore = create<MDContext>((set) => ({
@@ -19,12 +19,10 @@ const useMDStore = create<MDContext>((set) => ({
 	setTitle: (title) => set({ title }),
 	data: [],
 	setData: (data) => set({ data }),
-	alert: [
-		{
-			message: "",
-			type: "",
-		},
-	],
+	alert: {
+		message: "",
+		type: "",
+	},
 	setAlert: (alert) => set({ alert }),
 }));
 

@@ -12,7 +12,6 @@ export default function WithDropdown({
 	items,
 }: WithDropdownProps) {
 	const { setMarkdown, setTitle } = useMDStore();
-
 	return (
 		<div className="inline-flex rounded-md shadow-sm absolute right-0 bottom-5">
 			<button

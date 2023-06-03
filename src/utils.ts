@@ -1,5 +1,4 @@
-import useMDStore from "./stores/useMd";
-import { AlertType } from "./types";
+import { AlertType, TypeAlert } from "./types";
 import {SetState} from "zustand";
 const LOCAL_STORAGE_KEY = "markdown_data";
 
@@ -22,12 +21,16 @@ const saveMarkdown = (id: string, title: string, markdown: string, setAlert: Set
 	if (titleExists) {
 		setAlert({
 			message: "Title already exists",
-			type: "danger",
+			type: TypeAlert.Danger,
 		})
 		return;
 	}
 
 	markdownData.push({ id, title, markdown });
+	setAlert({
+		message: "Saved",
+		type: TypeAlert.Success,
+	})
 	return localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(markdownData));
 };
 
