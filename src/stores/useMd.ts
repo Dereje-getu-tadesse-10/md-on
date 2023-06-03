@@ -1,5 +1,14 @@
-import { AlertType, Item } from "../types";
+import {AlertType, Item, TypeAlert} from "../types";
 import { create } from "zustand";
+import { getMarkdownData } from "../utils";
+
+const getData = () => {
+	const markdownData = getMarkdownData();
+	if (markdownData?.length > 0) {
+		return markdownData
+	}
+	return [];
+}
 
 type MDContext = {
 	markdown: string;
@@ -13,15 +22,15 @@ type MDContext = {
 };
 
 const useMDStore = create<MDContext>((set) => ({
-	markdown: "# Hello World",
+	markdown: getData()[0]?.markdown || "# Hello World",
 	setMarkdown: (markdown) => set({ markdown }),
-	title: "Hello World",
+	title: getData()[0]?.title || "Hello World",
 	setTitle: (title) => set({ title }),
 	data: [],
 	setData: (data) => set({ data }),
 	alert: {
 		message: "",
-		type: "",
+		type: TypeAlert.Success,
 	},
 	setAlert: (alert) => set({ alert }),
 }));
