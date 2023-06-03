@@ -1,5 +1,6 @@
 import useMDStore from "./stores/useMd";
-
+import { AlertType } from "./types";
+import {SetState} from "zustand";
 const LOCAL_STORAGE_KEY = "markdown_data";
 
 const getMarkdownData = () => {
@@ -10,18 +11,19 @@ const getMarkdownData = () => {
 	return [];
 };
 
-const saveMarkdown = (id: string, title: string, markdown: string) => {
+const saveMarkdown = (id: string, title: string, markdown: string, setAlert: SetState<AlertType>) => {
 	const markdownData = getMarkdownData();
 
-	const { setAlert } = useMDStore();
+	const titleExists = markdownData.some((data: { title: string; }) => {
+		return data.title === title;
+	});
 
-	const titleExists = markdownData.some(
-		(data: { id: string; title: string; markdown: string }) =>
-			data.title === title,
-	);
 
 	if (titleExists) {
-		setAlert([{ message: "Title already exists", type: "danger" }]);
+		setAlert({
+			message: "Title already exists",
+			type: "danger",
+		})
 		return;
 	}
 
